@@ -16,13 +16,13 @@ from rich.console import Console
 
 console = Console()
 
-VERSION = "0.1"
+VERSION = "0.1.0"
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="scorecard",
-        description="Production Readiness Scorecard — AI-assisted code ships faster; this tool tells you when it's safe.",
+        description="Production Readiness Scorecard -- AI-assisted code ships faster; this tool tells you when it's safe.",
     )
     parser.add_argument(
         "target",
@@ -35,7 +35,7 @@ def build_parser() -> argparse.ArgumentParser:
         type=int,
         default=85,
         metavar="N",
-        help="Minimum passing score [0–100] (default: 85).",
+        help="Minimum passing score [0-100] (default: 85).",
     )
     parser.add_argument(
         "--version",

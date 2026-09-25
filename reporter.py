@@ -62,7 +62,7 @@ def _render_score_panel(result: ScoreResult) -> None:
     console.print(
         Panel(
             f"[bold]Production Readiness Score:[/bold] {combined.markup}\n{detail}",
-            title="[bold blue]Production Readiness Scorecard v0.1[/bold blue]",
+            title="[bold blue]Production Readiness Scorecard v0.1.0[/bold blue]",
             border_style="blue",
         )
     )
