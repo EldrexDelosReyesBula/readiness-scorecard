@@ -1,20 +1,71 @@
-# Byte-compiled / optimized / DLL files
+# =====================================================================
+# Git Exclusions for Production Readiness Scorecard
+# =====================================================================
+
+# --- Internal Strategy & Planning Documents ---
+# Keeps private notes, hackathon checklists, and prompt strategies local
+plans/
+scratch/
+tmp/
+*.tmp
+*.bak
+
+# --- Environment & Secrets ---
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+
+# --- Python Bytecode & Optimization ---
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
 
-# Virtual environments
+# --- Virtual Environments ---
 .venv/
 venv/
 ENV/
 env/
+.uv/
+pip-wheel-metadata/
 
-# IDE / Editor artifacts
-.vscode/
-.idea/
-.antigravity/
+# --- Testing & Type Checking Caches ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
 
-# Distribution / packaging
+# --- Build & Distribution Artifacts ---
 build/
 dist/
 *.egg-info/
+*.egg
+eggs/
+.eggs/
+
+# --- IDEs & Editor Metadata ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.antigravity/
+
+# --- OS Metadata ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- Log Files ---
+*.log
+npm-debug.log*
+yarn-debug.log*
