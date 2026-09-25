@@ -32,7 +32,7 @@ Developers frequently push code that "works on my machine," only to trigger prod
 
 ### Installation
 ```bash
-git clone https://github.com/<your-username>/readiness-scorecard.git
+git clone https://github.com/EldrexDelosReyesBula/readiness-scorecard.git
 cd readiness-scorecard
 pip install -r requirements.txt
 ```
