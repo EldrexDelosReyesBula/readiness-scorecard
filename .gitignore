@@ -5,6 +5,8 @@
 # --- Internal Strategy & Planning Documents ---
 # Keeps private notes, hackathon checklists, and prompt strategies local
 plans/
+presentation/
+generate_pptx.py
 scratch/
 tmp/
 *.tmp
