@@ -69,23 +69,25 @@ Readiness Scorecard v0.1.0
 Scanning 1 file(s) in evidence/sample_bad.py...
 
 +-------------------- Production Readiness Scorecard v0.1.0 --------------------+
-| Production Readiness Score: 80/100  (threshold: 85)                           |
-| Critical: 1  Warnings: 1  Info: 0                                             |
+| Production Readiness Score: 75/100  (threshold: 85)                           |
+| Critical: 1  Warnings: 2  Info: 0                                             |
 +-------------------------------------------------------------------------------+
 
                                  Issues Found
 +-------------------------------------------------------------------------------+
-| ID     | Severity | File              | Line | Message         | Fix          |
-|--------+----------+-------------------+------+-----------------+--------------|
-| ERR001 | CRITICAL | .../sample_bad.py |    5 | Unprotected     | Wrap call in |
-|        |          |                   |      | requests.get()  | try/except   |
-| ERR002 | WARNING  | .../sample_bad.py |   10 | Unprotected     | Wrap call in |
-|        |          |                   |      | open()          | try/except   |
+| ID      | Severity | File              | Line | Message         | Fix          |
+|---------+----------+-------------------+------+-----------------+--------------|
+| ERR001  | CRITICAL | .../sample_bad.py |    5 | Unprotected     | Wrap call in |
+|         |          |                   |      | requests.get()  | try/except   |
+| ERR002  | WARNING  | .../sample_bad.py |   10 | Unprotected     | Wrap call in |
+|         |          |                   |      | open()          | try/except   |
+| TIME001 | WARNING  | .../sample_bad.py |    5 | Missing timeout | Add explicit |
+|         |          |                   |      | in requests.get | timeout=10   |
 +-------------------------------------------------------------------------------+
 
 +----------------------------- Remediation Steps -------------------------------+
 |   * Fix 1 critical issue(s): wrap network/API calls in try/except.            |
-|   * Address 1 warning(s): protect file I/O and narrow broad except clauses.   |
+|   * Address 2 warning(s): protect file I/O and narrow broad except clauses.   |
 +-------------------------------------------------------------------------------+
 
 +-------------------------------------------------------------------------------+
@@ -129,7 +131,7 @@ $$\text{Final Score} = \max(0, \min(100, \text{Raw Score}))$$
 | Severity | Penalty | Target Operations |
 | :--- | :---: | :--- |
 | **Critical** | **-15 pts** | Naked network/API calls (`requests.*`, `httpx.*`, `urllib.request.*`) |
-| **Warning** | **-5 pts** | Unprotected file I/O (`open()`), broad `except:`, syntax warnings |
+| **Warning** | **-5 pts** | Missing network timeouts (`timeout=...`), unprotected file I/O (`open()`), broad `except:`, syntax warnings |
 | **Info** | **-1 pt** | Debug prints left in production code paths, missing docstrings |
 
 ---
@@ -143,7 +145,8 @@ $$\text{Final Score} = \max(0, \min(100, \text{Raw Score}))$$
 * **`main.py`**: CLI entry point with `argparse`, input validation, and exit code management.
 * **`scanner.py`**: Fast directory walker with noise exclusion (`.venv`, `__pycache__`, `.git`, `node_modules`).
 * **`checks/base.py`**: Shared dataclasses (`CheckIssue`, `ScoreResult`, `SeverityLevel`).
-* **`checks/missing_error_handling.py`**: AST visitor analyzing function bodies and enclosing `Try`/`ExceptHandler` blocks.
+* **`checks/missing_error_handling.py`**: AST visitor analyzing function bodies and enclosing `Try`/`ExceptHandler` blocks (`ERR001`, `ERR002`).
+* **`checks/missing_timeout.py`**: AST visitor verifying explicit `timeout` keyword parameters on HTTP calls (`TIME001`).
 * **`scorer.py`**: Deterministic weighted scoring calculator and remediation synthesizer.
 * **`reporter.py`**: Terminal visualizer formatted with `rich`, featuring Windows `cp1252` encoding safety.
 

@@ -6,8 +6,10 @@ Each check must expose a `run(file_path: str, source: str) -> List[CheckIssue]` 
 """
 
 from checks.missing_error_handling import MissingErrorHandlingCheck
+from checks.missing_timeout import MissingTimeoutCheck
 
 # Central registry — scanner iterates over this list for every Python file.
 ALL_CHECKS = [
     MissingErrorHandlingCheck(),
+    MissingTimeoutCheck(),
 ]
